@@ -12,6 +12,11 @@ body {
     line-height: 1.6;
 }
 
+/* reserve space for fixed navbar so content isn't hidden */
+body {
+    padding-top: 90px;
+}
+
 /* --- Navbar --- */
 .navbar {
     display: flex;
@@ -21,6 +26,16 @@ body {
     /* dark coffee brown */
     padding: 0.8rem 5%;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+/* make navbar fixed to top while scrolling */
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    z-index: 1000;
 }
 
 .logo-link {
@@ -104,7 +119,7 @@ body {
     justify-content: center;
     text-align: center;
     color: white;
-    padding-top: 80px;
+    padding-top: 0;
 }
 
 .hero-content {
