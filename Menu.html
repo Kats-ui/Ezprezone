@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>EZPREZONE</title>
+  <link rel="stylesheet" href="CSS/Menu.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-..." crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+</head>
+<body>
+  <!-- Sidebar Navigation -->
+  <div class="sidebar">
+    <h2>Menu</h2>
+    <ul>
+      <li><a href="#ezprezo-section">Ezprezo Based</a></li>
+      <li><a href="#sigezprezo-section">Signature Ezprezo</a></li>
+      <li><a href="#nonezprezo-section">Non-Ezprezo</a></li>
+      <li><a href="#nonezprezo-whipice-section">Non-Ezprezo Whip Ice</a></li>
+      <li><a href="#matcha-section">Matcha</a></li>
+      <li><a href="#sodapop-section">Soda Pop</a></li>
+      <li><a href="#croffle-section">Croffle</a></li>
+      <li><a href="#pasta-section">Pasta</a></li>
+    </ul>
+  </div>
+
+  <div class="main-content">
+  <header class="navbar">
+    <a href="home.html" class="logo-link">
+      <img src="images/ezprezone-logo.jpg" alt="Cafe Logo" class="logo" />
+    </a>
+
+    <nav>
+      <ul class="nav-links">
+                <li><a href="Home.html">Home</a></li>
+                <li><a href="About Us.html" >About</a></li>
+                <li><a href="Menu.html"class="active">Menu</a></li>
+                <li><a href="Loyalty Card.html">Loyalty</a></li>
+                <li><a href="Contacts.html">Contact</a></li>
+            
+            </ul>
+    </nav>
+
+    <div class="location-btn">
+            <i class="fas fa-map-marker-alt"></i>
+            <a class="aRemove" href="Contacts.html#findourlocation"><span class="findLocation">Find our location</span></a>
+    </div>
+
+  </header>
+
+  <script>
+  // Smooth scroll with offset for navbar
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function(e) {
+      e.preventDefault();
+
+      // Get the target element
+      const targetId = this.getAttribute('href').substring(1);
+      const targetElement = document.getElementById(targetId);
+
+      // Get the current scroll position and navbar height
+      const navbarHeight = document.querySelector('.navbar').offsetHeight; // You can also manually set this to 80px if it's fixed
+      const sidebarWidth = document.querySelector('.sidebar').offsetWidth; // Adjust this to the sidebar width
+
+      // Scroll to the target element, adjusting for navbar height and sidebar
+      window.scrollTo({
+        top: targetElement.offsetTop - navbarHeight, // Adjust the offset
+        left: sidebarWidth, // Optional: Adjust left scroll position to account for sidebar
+        behavior: 'smooth'
+      });
+    });
+  });
+</script>
+
+<section class="menu-section">
+    <h2>Our Menu</h2>
+
+      <!-- Ezprezo Based -->
+      <div class="category" id="ezprezo-section">
+        <h3>Ezprezo Based</h3>
+
+        <div class="menu-grid">
+          <div class="menu-item">
+            <img src="images/ezprezo/mocha.png" alt="Mocha" />
+            <h4>Mocha</h4>
+            <p>A gentle embrace of coffee and chocolate.</p>
+            <span class="price">Hot ₱120 | Iced ₱130</span>
+          </div>
+
+          <div class="menu-item">
+            <img src="images/ezprezo/white-mocha.png" alt="White Mocha" />
+            <h4>White Mocha</h4>
+            <p>Smooth, creamy comfort in every sip.</p>
+            <span class="price">Hot ₱120 | Iced ₱130</span>
+          </div>
+
+          <div class="menu-item">
+            <img src="images/ezprezo/caramel-latte.png" alt="Caramel Latte" />
+            <h4>Caramel Latte</h4>
+            <p>Warm caramel moments to slow down with.</p>
+            <span class="price">Hot ₱120 | Iced ₱130</span>
+          </div>
+
+          <div class="menu-item">
+            <img src="images/ezprezo/salted-caramel.png" alt="Salted Caramel" />
+            <h4>Salted Caramel</h4>
+            <p>A sweet whisper with a touch of calm.</p>
+            <span class="price">Hot ₱120 | Iced ₱130</span>
+          </div>
+
+          <div class="menu-item">
+            <img src="images/ezprezo/cappuccino.jpg" alt="Cappuccino" />
+            <h4>Cappuccino</h4>
+            <p>Soft foam, strong heart — peaceful energy.</p>
+            <span class="price">Hot ₱115 | Iced ₱125</span>
+          </div>
+        </div>
+
+        <div class="menu-grid">
+          <div class="menu-item">
+            <img src="images/ezprezo/caramel-machiato.png" alt="Caramel Macchiato" />
+            <h4>Caramel Macchiato</h4>
+            <p>Layered sweetness for quiet mornings.</p>
+            <span class="price">Hot ₱120 | Iced ₱130</span>
+          </div>
+
+          <div class="menu-item">
+            <img src="images/ezprezo/butterscotch.png" alt="Butterscotch" />
+            <h4>Butterscotch</h4>
+            <p>Golden warmth that feels like home.</p>
+            <span class="price">Hot ₱120 | Iced ₱130</span>
+          </div>
+
+          <div class="menu-item">
+            <img src="images/ezprezo/spanish-latte.png" alt="Spanish Latte" />
+            <h4>Spanish Latte</h4>
+            <p>A mellow blend of boldness and serenity.</p>
+            <span class="price">Hot ₱120 | Iced ₱130</span>
+          </div>
+
+          <div class="menu-item">
+            <img src="images/ezprezo/latte.jpg" alt="Latte" />
+            <h4>Latte</h4>
+            <p>Gentle and soothing, your daily pause.</p>
+            <span class="price">Hot ₱115 | Iced ₱125</span>
+          </div>
+
+          <div class="menu-item">
+            <img src="images/ezprezo/americano.png" alt="Americano" />
+            <h4>Americano</h4>
+            <p>Simple, honest, and beautifully calm.</p>
+            <span class="price">Hot ₱105 | Iced ₱115</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Signature Ezprezo -->
+      <div class="category" id="sigezprezo-section">
+        <h3>Signature Ezprezo-Based</h3>
+        <div class="menu-grid">
+          <div class="menu-item">
+            <img src="images/signature-ezprezo/nutella-latte.png" alt="Nutella Latte" />
+            <h4>Nutella Latte</h4>
+            <p>A warm hug of hazelnut and chocolate bliss.</p>
+            <span class="price">Hot ₱139 | Iced ₱150</span>
+          </div>
+
+          <div class="menu-item">
+            <img src="images/signature-ezprezo/dirty-matcha.png" alt="Dirty Matcha" />
+            <h4>Dirty Matcha</h4>
+            <p>Earthy calm meets bold espresso energy.</p>
+            <span class="price">Hot ₱139 | Iced ₱150</span>
+          </div>
+
+          <div class="menu-item">
+            <img src="images/signature-ezprezo/biscoff-latte.jpg" alt="Biscoff Latte" />
+            <h4>Biscoff Latte</h4>
+            <p>Sweet cookie comfort in every gentle sip.</p>
+            <span class="price">Hot ₱139 | Iced ₱150</span>
+          </div>
+        </div>
+        <div class="menu-grid">
+          <div class="menu-item">
+            <img src="images/signature-ezprezo/hazelnut-latte.png" alt="Hazelnut Latte" />
+            <h4>Hazelnut Latte</h4>
+            <p>Soft, nutty warmth to ease your day.</p>
+            <span class="price">Hot ₱120 | Iced ₱130</span>
+          </div>
+
+          <div class="menu-item">
+            <img src="images/signature-ezprezo/peppermint-mocha.png" alt="Peppermint Mocha" />
+            <h4>Peppermint Mocha</h4>
+            <p>Cool mint meets cozy chocolate harmony.</p>
+            <span class="price">Hot ₱129 | Iced ₱139</span>
+          </div>
+
+          <div class="menu-item">
+            <img src="images/signature-ezprezo/peppermint-white-mocha.png" alt="Peppermint White Mocha" />
+            <h4>Peppermint White Mocha</h4>
+            <p>A soothing chill wrapped in creamy calm.</p>
+            <span class="price">Hot ₱129 | Iced ₱139</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Non-Ezprezo -->
+      <div class="category" id="nonezprezo-section">
+        <h3>Non-Ezprezo</h3>
+        <div class="menu-grid">
+          <div class="menu-item">
+            <img src="images/non-ezprezo/matcha-latte.png" alt="Matcha Latte" />
+            <h4>Matcha Latte</h4>
+            <p>A calm balance of earthy and creamy peace.</p>
+            <span class="price">Hot ₱120 | Iced ₱130</span>
+          </div>
+
+          <div class="menu-item">
+            <img src="images/non-ezprezo/hot-chocolate.jpg" alt="Hot Chocolate" />
+            <h4>Hot Chocolate</h4>
+            <p>Pure warmth that feels like a quiet evening.</p>
+            <span class="price">₱125</span>
+          </div>
+
+          <div class="menu-item">
+            <img src="images/non-ezprezo/hibiscus-tea.png" alt="Hibiscus Tea" />
+            <h4>Hibiscus Tea</h4>
+            <p>A floral touch of serenity in every sip.</p>
+            <span class="price">Hot ₱95 | Iced ₱115</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Non-Ezprezo Whip Iced -->
+      <div class="category" id="nonezprezo-whipice-section">
+        <h3>Non-Ezprezo Whip Iced</h3>
+        <div class="menu-grid">
+          <div class="menu-item">
+            <img src="images/non-ezprezo/milo-cloud.png" alt="Milo Cloud" />
+            <h4>Milo Cloud</h4>
+            <p>A chocolatey dream floating on creamy clouds.</p>
+            <span class="price">₱139</span>
+          </div>
+
+          <div class="menu-item">
+            <img src="images/non-ezprezo/hershey-bliss.png" alt="Hershey Bliss" />
+            <h4>Hershey Bliss</h4>
+            <p>Smooth, sweet comfort in every chilled sip.</p>
+            <span class="price">₱139</span>
+          </div>
+
+          <div class="menu-item">
+            <img src="images/non-ezprezo/hibiscus-tea.png" alt="Biscoff Cream" />
+            <h4>Biscoff Cream</h4>
+            <p>Soft cookie warmth in a cloud of calm.</p>
+            <span class="price">₱139</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Matcha Series -->
+      <div class="category" id="matcha-section">
+        <h3>Matcha Series</h3>
+        <div class="menu-grid">
+          <div class="menu-item">
+            <img src="images/matcha/double-matcha.jpg" alt="Matcha Latte" />
+            <h4>Matcha Latte</h4>
+            <p>A gentle harmony of green tea and calm.</p>
+            <span class="price">Hot ₱120 | Iced ₱130</span>
+          </div>
+
+          <div class="menu-item">
+            <img src="images/matcha/double-matcha.jpg" alt="Double Matcha" />
+            <h4>Double Matcha</h4>
+            <p>Twice the matcha, twice the peace.</p>
+            <span class="price">₱145</span>
+          </div>
+
+          <div class="menu-item">
+            <img src="images/matcha/seasalt-matcha.jpg" alt="Sea Salt Matcha" />
+            <h4>Sea Salt Matcha</h4>
+            <p>A serene wave of creamy and salty balance.</p>
+            <span class="price">₱155</span>
+          </div>
+
+          <div class="menu-item">
+            <img src="images/matcha/matcha-berry.jpg" alt="Matcha Berry" />
+            <h4>Matcha Berry</h4>
+            <p>A tranquil blend of earthy and sweet delight.</p>
+            <span class="price">₱155</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Soda Pop -->
+      <div class="category" id="sodapop-section">
+        <h3>Soda Pop Series</h3>
+        <div class="menu-grid">
+          <div class="menu-item">
+            <img src="images/soda-pop/lychee.png" alt="Lychee" />
+            <h4>Lychee</h4>
+            <p>Soft sweetness that sparkles with calm.</p>
+        <span class="price">₱89</span>
+      </div>
+
+      <div class="menu-item">
+        <img src="images/soda-pop/green-apple.png" alt="Green Apple" />
+        <h4>Green Apple</h4>
+        <p>Crisp, cool, and quietly refreshing.</p>
+        <span class="price">₱89</span>
+      </div>
+
+      <div class="menu-item">
+        <img src="images/soda-pop/blueberry.png" alt="Blueberry" />
+        <h4>Blueberry</h4>
+        <p>Bubbly bliss with a hint of serenity.</p>
+        <span class="price">₱89</span>
+      </div>
+
+      <div class="menu-item">
+        <img src="images/soda-pop/mixed-berries.png" alt="Mixed Berries" />
+        <h4>Mixed Berries</h4>
+        <p>A peaceful blend of sweetness and joy.</p>
+        <span class="price">₱89</span>
+      </div>
+
+      <div class="menu-item">
+        <img src="images/soda-pop/strawberry.png" alt="Strawberry" />
+        <h4>Strawberry</h4>
+        <p>Sweet, light, and softly uplifting.</p>
+        <span class="price">₱89</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Croffle -->
+  <div class="category" id="croffle-section">
+    <h3>Croffle Series</h3>
+
+    <h4>Premium</h4>
+    <div class="menu-grid">
+      <div class="menu-item">
+        <img src="images/croffle/matcha-cream.jpg" alt="Matcha & Cream" />
+        <h4>Matcha & Cream</h4>
+        <p>A calm blend of earthy matcha and soft sweetness.</p>
+        <span class="price">₱130</span>
+      </div>
+
+      <div class="menu-item">
+        <img src="images/croffle/nutella-cream.jpg" alt="Nutella & Cream" />
+        <h4>Nutella & Cream</h4>
+        <p>Rich, hazelnut comfort in every golden bite.</p>
+        <span class="price">₱140</span>
+      </div>
+
+      <div class="menu-item">
+        <img src="images/croffle/cookies-&-cream.jpg" alt="Cookies & Cream" />
+        <h4>Cookies & Cream</h4>
+        <p>Crunchy, creamy peace in perfect harmony.</p>
+        <span class="price">₱140</span>
+      </div>
+
+      <div class="menu-item">
+        <img src="images/croffle/nutella-alcapone.jpg" alt="Nutella Alcapone" />
+        <h4>Nutella Alcapone</h4>
+        <p>A cozy twist of nuts and chocolate indulgence.</p>
+        <span class="price">₱140</span>
+      </div>
+
+      <div class="menu-item">
+        <img src="images/croffle/biscoff-cream.jpg" alt="Biscoff & Cream" />
+        <h4>Biscoff & Cream</h4>
+        <p>Soft, spiced sweetness that feels like home.</p>
+        <span class="price">₱140</span>
+      </div>
+    </div>
+
+    <h4>Classic</h4>
+    <div class="menu-grid">
+      <div class="menu-item">
+        <img src="images/croffle/og-chocolate.png" alt="OG Chocolate" />
+        <h4>OG Chocolate</h4>
+        <p>Simple joy, softly sweet and timeless.</p>
+        <span class="price">₱90</span>
+      </div>
+
+      <div class="menu-item">
+        <img src="images/croffle/nutella.png" alt="Nutella" />
+        <h4>Nutella</h4>
+        <p>A warm classic that melts your worries away.</p>
+        <span class="price">₱110</span>
+      </div>
+
+      <div class="menu-item">
+        <img src="images/croffle/Biscoff.png" alt="Biscoff" />
+        <h4>Biscoff</h4>
+        <p>Gentle spice and buttery calm in every bite.</p>
+        <span class="price">₱120</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Pasta -->
+  <div class="category" id="pasta-section">
+    <h3>Pasta Series</h3>
+    <div class="menu-grid">
+      <div class="menu-item">
+        <img src="images/pasta/spaghetti.jpg" alt="Meaty Spaghetti" />
+        <h4>Meaty Spaghetti</h4>
+        <p>A comforting classic filled with homestyle warmth.</p>
+        <span class="price">₱140</span>
+      </div>
+
+      <div class="menu-item">
+        <img src="images/pasta/chicken-pesto.png" alt="Chicken Carbonara" />
+        <h4>Chicken Carbonara</h4>
+        <p>Creamy, cozy, and softly satisfying.</p>
+        <span class="price">₱140</span>
+      </div>
+
+      <div class="menu-item">
+        <img src="images/pasta/tuna-pesto.jpg" alt="Tuna Pesto" />
+        <h4>Tuna Pesto</h4>
+        <p>Fresh, herby calm in every gentle bite.</p>
+        <span class="price">₱140</span>
+      </div>
+    </div>
+  </div>
+
+
+
+  <footer class="footer">
+    <p>© 2025 Ezprezo. All Rights Reserved.</p>
+  </footer>
+  </div>
+</body>
+</html>
