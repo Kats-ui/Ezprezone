@@ -202,3 +202,55 @@ button:focus-visible {
     padding-top: unset;
   }
 }
+
+/* Floating cart (global) */
+.float-cart {
+  position: fixed;
+  right: 18px;
+  bottom: 18px;
+  background: var(--accent);
+  color: #fff;
+  padding: 10px 14px;
+  border-radius: 999px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.12);
+  text-decoration: none;
+  font-weight: 700;
+  z-index: 1200;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  transition: transform .15s ease, box-shadow .15s ease, opacity .15s ease;
+}
+.float-cart:hover { transform: translateY(-4px); box-shadow: 0 10px 30px rgba(0,0,0,0.18); }
+.float-cart .cart-count { background: #fff; color: var(--brand-brown); padding: 2px 8px; border-radius: 999px; font-weight: 700; display:inline-block; transition: transform .18s ease; }
+.float-cart .cart-count.pop { transform: scale(1.18); }
+
+@media (max-width: 420px){
+  .float-cart { right: 10px; bottom: 12px; padding: 8px 10px; font-size: 0.95rem }
+  .float-cart .cart-count { padding: 2px 6px; }
+}
+
+/* Toast notifications */
+.toast {
+  position: fixed;
+  right: 18px;
+  bottom: 80px;
+  background: rgba(0,0,0,0.85);
+  color: #fff;
+  padding: 10px 14px;
+  border-radius: 8px;
+  z-index: 1300;
+  opacity: 0;
+  transform: translateY(8px);
+  transition: opacity .22s ease, transform .22s ease;
+  pointer-events: none;
+}
+.toast.show { opacity: 1; transform: translateY(0); pointer-events: auto; }
+
+/* Button disabled state */
+.button:disabled,
+button[disabled] {
+  opacity: 0.65;
+  cursor: not-allowed;
+  transform: none;
+}

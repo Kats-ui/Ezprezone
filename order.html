@@ -46,16 +46,16 @@
       <h1 class="order-title fade">Place Your Order</h1>
 
       <div class="order-layout">
-        <section class="menu-panel">
-          <h2>Menu</h2>
-          <p class="hint">Click "Add" to add items to your cart.</p>
-          <div id="menuList" class="menu-list">
-            <!-- items rendered by JS -->
+        <section class="gallery-panel">
+          <h2>Your Items</h2>
+          <div id="gallery" class="order-gallery">
+            <!-- gallery rendered from cart -->
           </div>
+          <p class="hint smaller">Click an item to focus in the cart. Use + / − to adjust quantity.</p>
         </section>
 
         <aside class="cart-panel">
-          <h2>Cart</h2>
+          <h2 id="cartTitle">Cart</h2>
           <div id="cartList" class="cart-list">
             <p class="empty">Your cart is empty</p>
           </div>
@@ -63,7 +63,9 @@
           <div class="cart-summary">
             <div class="summary-row">
               <span>Subtotal</span>
-              <span id="subtotal">₱0.00</span>
+              <span id="subtotal" aria-live="polite" aria-atomic="true"
+                >₱0.00</span
+              >
             </div>
 
             <div class="payment-section">
@@ -112,8 +114,10 @@
       <p>© 2025 Ezprezo. All Rights Reserved.</p>
     </footer>
 
+    <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
     <script>
-      // Sample item list (extend as needed)
+      // Known items (fallback data)
       const items = [
         { id: "espresso", name: "Espresso", price: 60 },
         { id: "americano", name: "Americano", price: 70 },
@@ -123,12 +127,40 @@
         { id: "pasta", name: "Pasta Alfredo", price: 150 },
       ];
 
-      const menuList = document.getElementById("menuList");
+      const galleryEl = document.getElementById('gallery');
       const cartList = document.getElementById("cartList");
       const subtotalEl = document.getElementById("subtotal");
       const paymentDetails = document.getElementById("paymentDetails");
       const placeOrderBtn = document.getElementById("placeOrder");
       const orderMessage = document.getElementById("orderMessage");
+
+      // attempt to resolve image URL for an item id; returns Promise that resolves with URL or null
+      function resolveImageFor(id){
+        const candidates = [
+          `images/ezprezo/${id}.png`,
+          `images/ezprezo/${id}.jpg`,
+          `images/non-ezprezo/${id}.png`,
+          `images/non-ezprezo/${id}.jpg`,
+          `images/signature-ezprezo/${id}.png`,
+          `images/signature-ezprezo/${id}.jpg`,
+          `images/matcha/${id}.jpg`,
+          `images/croffle/${id}.jpg`,
+          `images/pasta/${id}.jpg`,
+        ];
+        return new Promise((resolve)=>{
+          let i = 0;
+          function tryOne(){
+            if(i>=candidates.length){ resolve(null); return; }
+            const url = candidates[i++];
+            const img = new Image();
+            img.onload = ()=> resolve(url);
+            img.onerror = tryOne;
+            img.src = url;
+          }
+          tryOne();
+        });
+      }
+      orderMessage.setAttribute("role", "status");
 
       let cart = {};
 
@@ -136,32 +168,61 @@
         return "₱" + n.toFixed(2);
       }
 
-      function renderMenu() {
-        menuList.innerHTML = "";
-        items.forEach((it) => {
-          const card = document.createElement("div");
-          card.className = "menu-item card";
+      function showToast(msg) {
+        let t = document.getElementById("toast");
+        if (!t) {
+          t = document.createElement("div");
+          t.id = "toast";
+          t.className = "toast";
+          t.setAttribute("role", "status");
+          t.setAttribute("aria-live", "polite");
+          document.body.appendChild(t);
+        }
+        t.textContent = msg;
+        t.classList.add("show");
+        setTimeout(() => t.classList.remove("show"), 2400);
+      }
+
+      // removed menu rendering — this page now shows an interactive gallery of ordered items
+      async function renderGallery(){
+        galleryEl.innerHTML = '';
+        const keys = Object.keys(cart);
+        if(keys.length === 0){
+          galleryEl.innerHTML = '<p class="empty">No items yet — add from Menu</p>';
+          return;
+        }
+        // render each cart item as an interactive image card
+        for(const k of keys){
+          const it = cart[k];
+          const card = document.createElement('button');
+          card.type = 'button';
+          card.className = 'gallery-item card';
+          card.dataset.id = it.id;
+          const imgUrl = await resolveImageFor(it.id);
+          const imgPart = imgUrl ? `<img src="${imgUrl}" alt="${it.name}"/>` : `<div class="placeholder">${(it.name.split(' ')[0]||'Item').charAt(0)}</div>`;
           card.innerHTML = `
-            <h4>${it.name}</h4>
-            <p class="price">${formatMoney(it.price)}</p>
-            <div class="controls">
-              <input type="number" min="1" value="1" class="qty" data-id="${
-                it.id
-              }" />
-              <button class="button add" data-id="${it.id}">Add</button>
+            <div class="imgWrap">${imgPart}</div>
+            <div class="meta">
+              <strong>${it.name}</strong>
+              <div class="qtyBubble">Qty: <span class="q">${it.qty}</span></div>
+            </div>
+            <div class="gallery-controls">
+              <button class="smallBtn decrease" aria-label="Decrease ${it.name}">−</button>
+              <button class="smallBtn increase" aria-label="Increase ${it.name}">+</button>
+              <button class="smallBtn removeItem" aria-label="Remove ${it.name}">✕</button>
             </div>
           `;
-          menuList.appendChild(card);
-        });
-
-        menuList.addEventListener("click", (e) => {
-          const btn = e.target.closest(".add");
-          if (!btn) return;
-          const id = btn.dataset.id;
-          const qtyInput = menuList.querySelector(`.qty[data-id="${id}"]`);
-          const qty = Math.max(1, parseInt(qtyInput.value || 1, 10));
-          addToCart(id, qty);
-        });
+          galleryEl.appendChild(card);
+          // attach handlers
+          card.querySelector('.increase').addEventListener('click', (e)=>{ e.stopPropagation(); updateQty(it.id, it.qty+1); });
+          card.querySelector('.decrease').addEventListener('click', (e)=>{ e.stopPropagation(); updateQty(it.id, Math.max(0, it.qty-1)); });
+          card.querySelector('.removeItem').addEventListener('click', (e)=>{ e.stopPropagation(); removeFromCart(it.id); });
+          card.addEventListener('click', ()=>{
+            // focus corresponding cart item
+            const el = Array.from(document.querySelectorAll('.cart-item')).find(node => node.querySelector('.cart-qty')?.dataset.id === it.id);
+            if(el){ el.scrollIntoView({behavior:'smooth', block:'center'}); el.classList.add('highlight'); setTimeout(()=>el.classList.remove('highlight'),900); const inp = el.querySelector('.cart-qty'); if(inp) inp.focus(); }
+          });
+        }
       }
 
       function addToCart(id, qty = 1) {
@@ -173,8 +234,10 @@
       }
 
       function removeFromCart(id) {
+        const name = cart[id] && cart[id].name ? cart[id].name : "Item";
         delete cart[id];
         renderCart();
+        showToast(name + " removed");
       }
 
       function updateQty(id, qty) {
@@ -184,6 +247,8 @@
         }
         cart[id].qty = qty;
         renderCart();
+        const name = cart[id] && cart[id].name ? cart[id].name : "Item";
+        showToast(name + " quantity updated");
       }
 
       function renderCart() {
@@ -192,6 +257,10 @@
         if (keys.length === 0) {
           cartList.innerHTML = '<p class="empty">Your cart is empty</p>';
           subtotalEl.textContent = formatMoney(0);
+          placeOrderBtn.disabled = true;
+          saveCartToLocalStorage();
+          updateCartBadge();
+          renderGallery();
           return;
         }
         let sum = 0;
@@ -204,14 +273,18 @@
           row.innerHTML = `
             <div class="left">
               <strong>${it.name}</strong>
-              <div class="small">${formatMoney(
-                it.price
-              )} x <input type="number" min="1" value="${
-            it.qty
-          }" class="cart-qty" data-id="${it.id}" /></div>
+              <div class="small"><span class="qty-wrap">x <input type="number" min="1" value="${
+                it.qty
+              }" class="cart-qty" data-id="${
+            it.id
+          }" /></span><span class="unit-price" aria-hidden="true">${formatMoney(
+            it.price
+          )}</span></div>
             </div>
             <div class="right">
-              <span class="item-total">${formatMoney(total)}</span>
+              <span class="item-total" aria-label="Item total">${formatMoney(
+                total
+              )}</span>
               <button class="remove" data-id="${it.id}" aria-label="Remove ${
             it.name
           }">✕</button>
@@ -220,6 +293,7 @@
           cartList.appendChild(row);
         });
         subtotalEl.textContent = formatMoney(sum);
+        placeOrderBtn.disabled = false;
 
         // events for qty and remove
         cartList.querySelectorAll(".cart-qty").forEach((inp) => {
@@ -232,6 +306,40 @@
         });
         cartList.querySelectorAll(".remove").forEach((btn) => {
           btn.addEventListener("click", (e) => removeFromCart(btn.dataset.id));
+        });
+        // persist cart
+        saveCartToLocalStorage();
+        renderGallery();
+      }
+
+      function saveCartToLocalStorage() {
+        try {
+          localStorage.setItem("ezCart", JSON.stringify(cart));
+        } catch (e) {}
+        updateCartBadge();
+      }
+
+      function loadCartFromLocalStorage() {
+        try {
+          const saved = localStorage.getItem("ezCart");
+          if (!saved) return;
+          const obj = JSON.parse(saved);
+          cart = {};
+          Object.values(obj).forEach((it) => {
+            cart[it.id] = it;
+          });
+        } catch (e) {}
+      }
+
+      function updateCartBadge() {
+        const count = Object.values(cart).reduce(
+          (s, it) => s + (it.qty || 0),
+          0
+        );
+        document.querySelectorAll(".cart-count").forEach((el) => {
+          el.textContent = count;
+          el.classList.add("pop");
+          setTimeout(() => el.classList.remove("pop"), 220);
         });
       }
 
@@ -267,6 +375,7 @@
         if (keys.length === 0) {
           orderMessage.textContent = "Add at least one item to the cart.";
           orderMessage.classList.add("error");
+          showToast("Add at least one item to the cart.");
           return;
         }
         const name = document.getElementById("custName").value.trim();
@@ -274,6 +383,7 @@
         if (!name || !contact) {
           orderMessage.textContent = "Please enter your name and contact.";
           orderMessage.classList.add("error");
+          showToast("Please enter your name and contact.");
           return;
         }
         const method = document.querySelector(
@@ -286,6 +396,7 @@
             orderMessage.textContent =
               "Please enter payment reference for selected method.";
             orderMessage.classList.add("error");
+            showToast("Please enter payment reference for selected method.");
             return;
           }
           ref = pRef.value.trim();
@@ -306,25 +417,34 @@
         summary += `\nTotal: ${formatMoney(total)}`;
 
         // show summary (replace with ajax submission back-end if needed)
-        alert("Order placed!\n\n" + summary);
+        showToast("Order placed successfully!");
+        // optionally show full summary in console for now
+        console.info("Order summary:\n" + summary);
         orderMessage.textContent = "Order placed successfully! Thank you.";
         orderMessage.classList.remove("error");
         orderMessage.classList.add("success");
+        orderMessage.setAttribute("aria-live", "polite");
         // reset
         cart = {};
         renderCart();
         document.getElementById("custName").value = "";
         document.getElementById("custContact").value = "";
         handlePaymentChange();
+        localStorage.removeItem("ezCart");
+        updateCartBadge();
+        localStorage.removeItem("ezCart");
+        updateCartBadge();
       });
 
-      // init
-      renderMenu();
+      // init - load persisted cart from Menu page
+      loadCartFromLocalStorage();
       renderCart();
+      renderGallery();
       document
         .querySelectorAll('input[name="payment"]')
         .forEach((r) => r.addEventListener("change", handlePaymentChange));
       handlePaymentChange();
+      updateCartBadge();
     </script>
 
     <script>

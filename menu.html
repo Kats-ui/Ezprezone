@@ -440,6 +440,43 @@
   </footer>
   </div>
 
+  <!-- Floating cart button -->
+  <a href="order.html" class="float-cart" aria-label="Cart" aria-live="polite">🛒 <span class="cart-count" aria-hidden="false">0</span></a>
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+  <script>
+    (function(){
+      /* Cart integration for Menu -> Order (localStorage key: ezCart) */
+      function slugify(s){ return s.toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/(^-|-$)/g,''); }
+      function getCart(){ try{ return JSON.parse(localStorage.getItem('ezCart')) || {}; }catch(e){return{}} }
+      function showToast(msg){ let t = document.getElementById('toast'); if(!t){ t = document.createElement('div'); t.id='toast'; t.className='toast'; t.setAttribute('role','status'); t.setAttribute('aria-live','polite'); document.body.appendChild(t); } t.textContent = msg; t.classList.add('show'); setTimeout(()=> t.classList.remove('show'), 2400); }
+      function setCart(c){ try{ localStorage.setItem('ezCart', JSON.stringify(c)); }catch(e){}; updateCartBadge(); }
+      function updateCartBadge(){ const cart=getCart(); const count=Object.values(cart).reduce((s,it)=>s+(it.qty||0),0); document.querySelectorAll('.cart-count').forEach(el=>{ el.textContent=count; el.classList.add('pop'); setTimeout(()=>el.classList.remove('pop'),220); }); }
+      function parsePriceText(txt){ const nums = txt.match(/(\d+(?:\.\d+)?)/g); if(!nums) return [0]; return nums.map(n=>parseFloat(n)); }
+      function createControls(mi){ if(mi.querySelector('.menu-controls')) return; const name = mi.querySelector('h4')?.textContent?.trim() || 'Item'; const priceText = mi.querySelector('.price')?.textContent?.trim() || ''; const prices = parsePriceText(priceText); const controls = document.createElement('div'); controls.className='menu-controls'; controls.style.marginTop='0.5rem'; const qty = document.createElement('input'); qty.type='number'; qty.min=1; qty.value=1; qty.className='qty'; qty.style.width='64px'; qty.style.marginRight='0.5rem'; controls.appendChild(qty);
+        if(prices.length>=2){ const sel = document.createElement('select'); sel.className='size'; sel.style.marginRight='0.5rem'; const hot = document.createElement('option'); hot.value=prices[0]; hot.text = 'Hot — ₱'+prices[0]; const iced = document.createElement('option'); iced.value=prices[1]; iced.text = 'Iced — ₱'+prices[1]; sel.appendChild(hot); sel.appendChild(iced); controls.appendChild(sel); }
+        const btn = document.createElement('button'); btn.type='button'; btn.className='button add-to-order'; btn.textContent='Add to Order'; btn.style.marginRight='0.4rem'; controls.appendChild(btn);
+        const btn2 = document.createElement('button'); btn2.type='button'; btn2.className='button add-and-go'; btn2.textContent='Add & Order'; btn2.style.background='#4e342e'; controls.appendChild(btn2);
+        mi.appendChild(controls);
+
+        btn.addEventListener('click', ()=>{
+          const q = Math.max(1, parseInt(qty.value||1,10)); const sizeSel = mi.querySelector('.size'); const price = sizeSel ? parseFloat(sizeSel.value) : (prices[0] || parsePriceText(priceText)[0] || 0); const sizeLabel = sizeSel ? (sizeSel.selectedOptions[0].text.split('—')[0].trim()) : '';
+          const id = slugify(name) + (sizeLabel?'-'+sizeLabel.toLowerCase():''); const item = { id, name: name + (sizeLabel? ' ('+sizeLabel+')':''), price, qty: q };
+          const cart = getCart(); if(cart[id]) cart[id].qty += item.qty; else cart[id] = item; setCart(cart);
+          btn.textContent='Added ✓'; mi.classList.add('added'); setTimeout(()=>mi.classList.remove('added'),220); showToast(item.name + ' added to cart'); setTimeout(()=>btn.textContent='Add to Order',900);
+          // help with visibility of controls on very narrow screens
+          qty.blur(); if(sizeSel) sizeSel.blur();
+        });
+        btn2.addEventListener('click', ()=>{ btn.click(); window.location.href='order.html'; });
+      }
+      document.querySelectorAll('.menu-item').forEach(createControls);
+      // observe for dynamically added menu-items
+      const obs = new MutationObserver(muts=>{ muts.forEach(m=>{ m.addedNodes && m.addedNodes.forEach(n=>{ if(n.nodeType===1 && n.matches && n.matches('.menu-item')) createControls(n); }); }); });
+      obs.observe(document.body,{ childList:true, subtree:true });
+      updateCartBadge();
+    })();
+  </script>
+
   <script>
     (function() {
       const faders = document.querySelectorAll('.fade');
