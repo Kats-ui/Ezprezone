@@ -1,87 +1,187 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>EZPREZONE</title>
-     <link rel="stylesheet" href="CSS/About style.css">
+    <link rel="stylesheet" href="CSS/common.css" />
+    <link rel="stylesheet" href="CSS/About style.css" />
 
-     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-..." crossorigin="anonymous" referrerpolicy="no-referrer" />
-</head>
-<body>
-      <div class="main-content">
-  <header class="navbar">
-    <a href="home.html" class="logo-link">
-      <img src="images/ezprezone-logo.jpg" alt="Cafe Logo" class="logo" />
-    </a>
-        <nav>
-              <ul class="nav-links">
-                <li><a href="Home.html">Home</a></li>
-                <li><a href="About Us.html" class="active">About</a></li>
-                <li><a href="Menu.html">Menu</a></li>
-                <li><a href="Loyalty Card.html">Loyalty</a></li>
-                <li><a href="Contacts.html">Contact</a></li>
-            
-            </ul>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  </head>
+  <body class="page-transition preload">
+    <div class="main-content">
+      <header class="navbar" role="banner">
+        <a href="index.html" class="logo-link">
+          <img class="logo" src="images/B5/ezprezone-logo.jpg" alt="EZPREZONE Logo" />
+        </a>
+        <nav role="navigation" aria-label="Main navigation">
+          <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="aboutus.html" class="active" aria-current="page">About</a></li>
+            <li><a href="menu.html">Menu</a></li>
+            <li><a href="loyaltycard.html">Loyalty</a></li>
+            <li><a href="contacts.html">Contact</a></li>
+          </ul>
         </nav>
         <div class="location-btn">
-            <i class="fas fa-map-marker-alt"></i>
-            <a class="aRemove" href="Contacts.html#findourlocation"><span class="findLocation">Find our location</span></a>
+          <i class="fas fa-map-marker-alt" aria-hidden="true"></i>
+          <a class="aRemove" href="contacts.html#findourlocation"><span class="findLocation">Find our location</span></a>
         </div>
-    </header>
+      </header>
 
-    <div class="bgBox">
+      <div class="bgBox">
         <div class="reviewsBox">
-            <h1 class="h1Reviews">CUSTOMER REVIEWS</h1>
+          <h1 class="h1Reviews fade">CUSTOMER REVIEWS</h1>
         </div>
-    </div>
+      </div>
 
-    <div class="reviews-section">
+      <div class="reviews-section">
         <div class="container">
-            <div class="reviews-content">
-                <div class="reviews-item reviews-summary">
-                    <h2>Our Community's Feedback</h2>
-                    <p>EZPREZONE in Del Carmen, Calabanga, is proud to be a local favorite. With an average rating of 4.8/5 from over 200 reviews, our customers love the cozy ambiance, quality coffee, and friendly service. Here’s what they’re saying!</p>
-                </div>
-                <div class="reviews-item">
-                    <div class="review">
-                        <img src="images/img rev/default-profile-account-unknown-icon-black-silhouette-free-vector.jpg" alt="Customer Arjohn">
-                        <div class="review-content">
-                            <h3>Arjohn S. <span class="rating"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></span></h3>
-                            <p>"EZPREZONE is my go-to spot in Calabanga! The latte art is stunning, and the staff always make me feel at home. Their Ethiopian blend is a must-try!"</p>
-                        </div>
-                    </div>
-                    <div class="review">
-                        <img src="images/img rev/default-profile-account-unknown-icon-black-silhouette-free-vector.jpg"  alt="Customer Carlo">
-                        <div class="review-content">
-                            <h3>Carlo V. <span class="rating"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i></span></h3>
-                            <p>"The croissants are to die for, and the iced coffee is perfect for hot days. The vibe at EZPREZONE is so welcoming, I keep coming back!"</p>
-                        </div>
-                    </div>
-                    <div class="review">
-                        <img src="images/img rev/default-profile-account-unknown-icon-black-silhouette-free-vector.jpg"  alt="Customer Marian">
-                        <div class="review-content">
-                            <h3>Marian P. <span class="rating"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i></span></h3>
-                            <p>"Great coffee, but the service can be a bit slow during peak hours. Still, the cozy atmosphere and delicious pastries make it worth the wait."</p>
-                        </div>
-                    </div>
-                    <div class="review">
-                        <img src="images/img rev/default-profile-account-unknown-icon-black-silhouette-free-vector.jpg"  alt="Customer Miguel">
-                        <div class="review-content">
-                            <h3>Miguel T. <span class="rating"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></span></h3>
-                            <p>"Best coffee shop in Del Carmen! The baristas are super friendly, and the chocolate tart is heavenly. Highly recommend!"</p>
-                        </div>
-                    </div>
-                </div>
-                <a href="About Us.html" class="button">Back to About Us</a>
+          <div class="reviews-content">
+            <div class="reviews-item reviews-summary">
+              <h2>Our Community's Feedback</h2>
+              <p>
+                EZPREZONE in Del Carmen, Calabanga, is proud to be a local
+                favorite. With an average rating of 4.8/5 from over 200 reviews,
+                our customers love the cozy ambiance, quality coffee, and
+                friendly service. Here’s what they’re saying!
+              </p>
             </div>
+            <div class="reviews-item">
+              <div class="review">
+                <img
+                  src="images/img rev/default-profile-account-unknown-icon-black-silhouette-free-vector.jpg"
+                  alt="Customer Arjohn"
+                />
+                <div class="review-content">
+                  <h3>
+                    Arjohn S.
+                    <span class="rating"
+                      ><i class="fas fa-star"></i><i class="fas fa-star"></i
+                      ><i class="fas fa-star"></i><i class="fas fa-star"></i
+                      ><i class="fas fa-star"></i
+                    ></span>
+                  </h3>
+                  <p>
+                    "EZPREZONE is my go-to spot in Calabanga! The latte art is
+                    stunning, and the staff always make me feel at home. Their
+                    Ethiopian blend is a must-try!"
+                  </p>
+                </div>
+              </div>
+              <div class="review">
+                <img
+                  src="images/img rev/default-profile-account-unknown-icon-black-silhouette-free-vector.jpg"
+                  alt="Customer Carlo"
+                />
+                <div class="review-content">
+                  <h3>
+                    Carlo V.
+                    <span class="rating"
+                      ><i class="fas fa-star"></i><i class="fas fa-star"></i
+                      ><i class="fas fa-star"></i><i class="fas fa-star"></i
+                      ><i class="fas fa-star-half-alt"></i
+                    ></span>
+                  </h3>
+                  <p>
+                    "The croissants are to die for, and the iced coffee is
+                    perfect for hot days. The vibe at EZPREZONE is so welcoming,
+                    I keep coming back!"
+                  </p>
+                </div>
+              </div>
+              <div class="review">
+                <img
+                  src="images/img rev/default-profile-account-unknown-icon-black-silhouette-free-vector.jpg"
+                  alt="Customer Marian"
+                />
+                <div class="review-content">
+                  <h3>
+                    Marian P.
+                    <span class="rating"
+                      ><i class="fas fa-star"></i><i class="fas fa-star"></i
+                      ><i class="fas fa-star"></i><i class="fas fa-star"></i
+                      ><i class="far fa-star"></i
+                    ></span>
+                  </h3>
+                  <p>
+                    "Great coffee, but the service can be a bit slow during peak
+                    hours. Still, the cozy atmosphere and delicious pastries
+                    make it worth the wait."
+                  </p>
+                </div>
+              </div>
+              <div class="review">
+                <img
+                  src="images/img rev/default-profile-account-unknown-icon-black-silhouette-free-vector.jpg"
+                  alt="Customer Miguel"
+                />
+                <div class="review-content">
+                  <h3>
+                    Miguel T.
+                    <span class="rating"
+                      ><i class="fas fa-star"></i><i class="fas fa-star"></i
+                      ><i class="fas fa-star"></i><i class="fas fa-star"></i
+                      ><i class="fas fa-star"></i
+                    ></span>
+                  </h3>
+                  <p>
+                    "Best coffee shop in Del Carmen! The baristas are super
+                    friendly, and the chocolate tart is heavenly. Highly
+                    recommend!"
+                  </p>
+                </div>
+              </div>
+            </div>
+            <a href="aboutus.html" class="button">Back to About Us</a>
+          </div>
         </div>
+      </div>
+
+      <footer class="footer">
+        <p>© 2025 Ezprezo. All Rights Reserved.</p>
+      </footer>
     </div>
 
-  
-  <footer class="footer">
-    <p>© 2025 Ezprezo. All Rights Reserved.</p>
-  </footer>
-  </div>
-</body>
+    <script>
+      (function() {
+        const faders = document.querySelectorAll('.fade');
+        if (!('IntersectionObserver' in window) || faders.length === 0) return;
+        const appearOptions = { threshold: 0.2, rootMargin: '0px 0px -50px 0px' };
+        const appearOnScroll = new IntersectionObserver((entries, observer) => {
+          entries.forEach(entry => {
+            if (!entry.isIntersecting) return;
+            entry.target.classList.add('appear');
+            observer.unobserve(entry.target);
+          });
+        }, appearOptions);
+        faders.forEach(fader => appearOnScroll.observe(fader));
+      })();
+    </script>
+
+    <script>
+      (function(){
+        const body = document.body;
+        if(!body) return;
+        body.classList.add('page-transition');
+        window.addEventListener('DOMContentLoaded', ()=> requestAnimationFrame(()=> body.classList.remove('preload')));
+        document.addEventListener('click', function(e){
+          const a = e.target.closest('a');
+          if(!a) return;
+          const href = a.getAttribute('href');
+          if(!href) return;
+          if(a.target === '_blank' || href.indexOf('mailto:') === 0 || href.indexOf('tel:') === 0 || href.indexOf('javascript:') === 0) return;
+          let url;
+          try{ url = new URL(href, location.href); }catch(err){ return; }
+          if(url.origin !== location.origin) return;
+          if(url.hash && url.pathname === location.pathname) return;
+          if(a.hasAttribute('data-no-transition')) return;
+          e.preventDefault();
+          body.classList.add('preload');
+          setTimeout(()=> location.href = url.href, 360);
+        }, false);
+      })();
+    </script>
+  </body>
 </html>

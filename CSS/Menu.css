@@ -6,111 +6,14 @@
   font-family: "Poppins", sans-serif;
 }
 
-/* --- Navbar --- */
-.navbar {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  z-index: 1000;
-
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background-color: #503325; /* dark coffee brown */
-  padding: 0.3rem 5%; /* decreased height */
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
-}
-.logo-link {
-  display: inline-block;
-}
-
-.logo {
-  height: 60px;
-  cursor: pointer;
-  transition: transform 0.2s ease;
-}
-
-.logo:hover {
-  transform: scale(1.05);
-}
-
-/* --- Navigation Links --- */
-.nav-links {
-  list-style: none;
-  display: flex;
-  gap: 1.2rem;
-}
-
-.nav-links a {
-  text-decoration: none;
-  color: #ffffff;
-  font-weight: 500;
-  padding: 6px 16px;
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  border-radius: 20px;
-  transition: all 0.3s ease;
-}
-.nav-links a {
-  height: 60px;
-  cursor: pointer;
-  transition: transform 0.2s ease;
-}
-.nav-links a:hover {
-  transform: scale(2.05);
-}
-.nav-links a:hover,
-.nav-links .active {
-  background-color: rgba(255, 255, 255, 0.15);
-}
-.nav-links a:active {
-  height: 60px;
-  cursor: pointer;
-  transition: transform 0.2s ease;
-}
-.nav-links a:active {
-  transform: scale(0.95);
-}
-
-/* --- Location Button --- */
-.location-btn {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  color: #ffffff;
-  font-weight: 600;
-  cursor: pointer;
-  transition: transform 0.3s ease;
-}
-
-.location-btn i {
-  font-size: 1.2rem;
-}
-
-.location-btn:hover {
-  transform: scale(1.05);
-}
-.findLocation {
-    color: white;
-}
-
-body {
-  margin-top: 80px;
-  background-color: #fff;
-  color: #503325;
-  line-height: 1.6;
-}
-
-html {
-    scroll-behavior: smooth;
-  }
+/* Navbar styles moved to CSS/common.css */
 
 /* --- Sidebar Navigation --- */
 .sidebar {
   position: fixed;
-  top: 40px; /* below the navbar */
+  top: calc(var(--nav-height) + 8px); /* align below navbar */
   left: 0;
-  height: calc(100% - 30px);
+  height: calc(100% - calc(var(--nav-height) + 16px));
   z-index: 500; /* stays below navbar */
   width: 250px;
   background-color: #3b241a;
@@ -145,7 +48,7 @@ html {
   display: block;
   padding: 10px 15px;
   border-radius: 8px;
-  transition: all 0.3s ease;
+  transition: all 0.25s ease;
 }
 
 .sidebar ul li a:hover {
@@ -156,8 +59,21 @@ html {
 /* --- Main Content --- */
 .main-content {
   margin-left: 250px; /* space for sidebar */
-  padding: 20px;
+  padding: 28px 20px 40px 20px;
 }
+
+body {
+  margin-top: calc(var(--nav-height));
+  background-color: #fff;
+  color: #503325;
+  line-height: 1.6;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* (Removed duplicate sidebar block; the sidebar is defined once above and aligned to navbar using var(--nav-height)) */
 
 /* --- Responsive Sidebar --- */
 @media (max-width: 768px) {
@@ -179,7 +95,6 @@ html {
     scroll-margin-bottom: 50px;
   }
 
-  
   .sidebar h2 {
     margin-bottom: 1rem;
   }
@@ -204,9 +119,7 @@ html {
     background-color: #6d4c41;
     padding-left: 15px;
   }
-
 }
-
 
 /* --- Menu Section --- */
 .menu-section {
@@ -236,7 +149,7 @@ html {
 /* --- Menu Grid --- */
 .menu-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
   gap: 1rem 1rem; /* horizontal and vertical spacing */
   align-items: start;
   margin-bottom: 1rem; /* space between top and bottom sections */
@@ -249,7 +162,7 @@ html {
   overflow: hidden;
   text-align: center;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
-  width: 250px; /* keep original card width */
+  max-width: 300px; /* responsive max width */
   margin: 0 auto; /* center each card */
 }
 
@@ -282,7 +195,7 @@ html {
 /* Hover effect */
 .menu-item:hover {
   transform: translateY(-5px);
-  box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
 }
 
 /* --- Footer --- */

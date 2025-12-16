@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Our Loyalty Card</title>
+    <meta
+      charset="UTF-8"
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
+    <link rel="stylesheet" href="CSS/common.css" />
+    <link rel="stylesheet" href="CSS/Loyalty.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  </head>
+
+  <body>
+    <header class="navbar" role="banner">
+      <a href="index.html" class="logo-link">
+        <img class="logo" src="images/B5/ezprezone-logo.jpg" alt="EZPREZONE Logo" />
+      </a>
+
+      <nav role="navigation" aria-label="Main navigation">
+        <ul class="nav-links">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="aboutus.html">About</a></li>
+          <li><a href="menu.html">Menu</a></li>
+          <li><a href="loyaltycard.html" class="active" aria-current="page">Loyalty</a></li>
+          <li><a href="contacts.html">Contact</a></li>
+        </ul>
+      </nav>
+
+      <div class="location-btn">
+        <i class="fas fa-map-marker-alt" aria-hidden="true"></i>
+        <a class="aRemove" href="contacts.html#findourlocation"><span class="findLocation">Find our location</span></a>
+      </div>
+    </header>
+
+    <div>
+      <img
+        class="loyaltyCardBOX fade"
+        src="images/B5/Loyalty_Card.jpg"
+        alt="Loyalty Card"
+      />
+    </div>
+
+    <div class="loyaltyBelowBox">
+      <div class="loyaltyBelowBox2"></div>
+      <p class="loyaltyText fade">Want this Loyalty Card? Just Dine In!</p>
+
+      <!-- Footer -->
+    </div>
+
+    <footer class="footer">
+      <p>© 2025 Ezprezo. All Rights Reserved.</p>
+    </footer>
+
+    <script>
+      (function() {
+        const faders = document.querySelectorAll('.fade');
+        if (!('IntersectionObserver' in window) || faders.length === 0) return;
+        const appearOptions = { threshold: 0.2, rootMargin: '0px 0px -50px 0px' };
+        const appearOnScroll = new IntersectionObserver((entries, observer) => {
+          entries.forEach(entry => {
+            if (!entry.isIntersecting) return;
+            entry.target.classList.add('appear');
+            observer.unobserve(entry.target);
+          });
+        }, appearOptions);
+        faders.forEach(fader => appearOnScroll.observe(fader));
+      })();
+    </script>
+
+    <script>
+      (function(){
+        const body = document.body;
+        if(!body) return;
+        body.classList.add('page-transition');
+        window.addEventListener('DOMContentLoaded', ()=> requestAnimationFrame(()=> body.classList.remove('preload')));
+        document.addEventListener('click', function(e){
+          const a = e.target.closest('a');
+          if(!a) return;
+          const href = a.getAttribute('href');
+          if(!href) return;
+          if(a.target === '_blank' || href.indexOf('mailto:') === 0 || href.indexOf('tel:') === 0 || href.indexOf('javascript:') === 0) return;
+          let url;
+          try{ url = new URL(href, location.href); }catch(err){ return; }
+          if(url.origin !== location.origin) return;
+          if(url.hash && url.pathname === location.pathname) return;
+          if(a.hasAttribute('data-no-transition')) return;
+          e.preventDefault();
+          body.classList.add('preload');
+          setTimeout(()=> location.href = url.href, 360);
+        }, false);
+      })();
+    </script>
+  </body>
+</html>

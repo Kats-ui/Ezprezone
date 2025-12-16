@@ -1,0 +1,204 @@
+:root {
+  --brand-brown: #503325;
+  --brand-cream: #ffe0b2;
+  --accent: #ff6b35;
+  --nav-height: 72px;
+}
+
+/* Reset + base */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: "Poppins", sans-serif;
+}
+html {
+  scroll-behavior: smooth;
+}
+body {
+  color: var(--brand-brown);
+  background: #fff;
+  padding-top: calc(var(--nav-height));
+  -webkit-font-smoothing: antialiased;
+}
+
+/* --- Navbar (shared) --- */
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: var(--nav-height);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 5%;
+  background: var(--brand-brown);
+  z-index: 1000;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+}
+.logo-link {
+  display: inline-block;
+}
+.logo {
+  height: 52px;
+  cursor: pointer;
+  transition: transform 0.18s ease;
+}
+.logo:hover {
+  transform: scale(1.03);
+}
+
+/* Nav links */
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+.nav-links a {
+  color: #fff;
+  text-decoration: none;
+  padding: 8px 14px;
+  border-radius: 18px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  font-weight: 600;
+  transition: transform 0.15s ease, background 0.15s ease;
+}
+.nav-links a:hover {
+  transform: scale(1.05);
+  background: rgba(255, 255, 255, 0.08);
+}
+.nav-links .active {
+  background: rgba(255, 255, 255, 0.12);
+}
+
+/* Location button */
+.location-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: #fff;
+  font-weight: 600;
+  cursor: pointer;
+}
+.location-btn i {
+  font-size: 1.15rem;
+}
+.location-btn a {
+  color: #fff;
+  text-decoration: none;
+}
+
+/* Shared buttons */
+.button,
+.cta-button,
+.promo-button {
+  display: inline-block;
+  padding: 0.7rem 1.2rem;
+  background: var(--accent);
+  color: #fff;
+  border-radius: 30px;
+  text-decoration: none;
+  font-weight: 700;
+  border: 0;
+  transition: transform 0.15s ease, filter 0.15s ease;
+}
+.button:hover,
+.cta-button:hover,
+.promo-button:hover {
+  transform: translateY(-3px);
+  filter: brightness(0.98);
+}
+
+/* Typography */
+h1 {
+  font-size: 2.2rem;
+  color: var(--brand-brown);
+  line-height: 1.15;
+  margin-bottom: 0.6rem;
+}
+h2 {
+  font-size: 1.4rem;
+  color: var(--brand-brown);
+  margin-bottom: 0.4rem;
+}
+h3 {
+  font-size: 1.1rem;
+  color: #5d4037;
+  margin-bottom: 0.3rem;
+}
+body,
+p {
+  line-height: 1.6;
+}
+
+a:focus-visible,
+button:focus-visible {
+  outline: 3px solid rgba(255, 107, 53, 0.18);
+  outline-offset: 3px;
+}
+
+/* Card utility */
+.card {
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.06);
+  padding: 1rem;
+}
+
+/* Footer */
+.footer {
+  text-align: center;
+  padding: 2rem 0;
+  background: #f5f5f5;
+  color: #5d4037;
+  font-size: 0.95rem;
+}
+
+/* Utility */
+.hidden {
+  display: none;
+}
+
+/* --- Scroll reveal animations --- */
+.fade {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+  will-change: opacity, transform;
+}
+.fade.appear {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* --- Page transition (fade between pages) --- */
+.page-transition {
+  opacity: 1;
+  transition: opacity 360ms ease;
+}
+.page-transition.preload {
+  opacity: 0;
+  pointer-events: none; /* avoid clicks while fading out */
+}
+.page-transition.disable-transitions {
+  transition: none !important;
+} 
+
+/* Responsive navbar */
+@media (max-width: 768px) {
+  .navbar {
+    flex-direction: column;
+    gap: 0.5rem;
+    height: auto;
+    padding: 12px 5%;
+  }
+  .nav-links {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  body {
+    padding-top: unset;
+  }
+}

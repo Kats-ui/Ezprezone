@@ -1,90 +1,176 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>EZPREZONE</title>
-     <link rel="stylesheet" href="CSS/About style.css">
-     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-..." crossorigin="anonymous" referrerpolicy="no-referrer" />
-</head>
-<body>
-      <div class="main-content">
-        <header class="navbar">
-        <a href="home.html" class="logo-link">
-      <img src="images/ezprezone-logo.jpg" alt="Cafe Logo" class="logo" />
-    </a>
-        <nav>
-           <ul class="nav-links">
-                <li><a href="Home.html">Home</a></li>
-                <li><a href="About Us.html" class="active">About</a></li>
-                <li><a href="Menu.html">Menu</a></li>
-                <li><a href="Loyalty Card.html">Loyalty</a></li>
-                <li><a href="Contacts.html">Contact</a></li>
-            
-            </ul>
-       </nav>
+    <link rel="stylesheet" href="CSS/common.css" />
+    <link rel="stylesheet" href="CSS/About style.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  </head>
+  <body class="page-transition preload">
+    <div class="main-content">
+      <header class="navbar" role="banner">
+        <a href="index.html" class="logo-link">
+          <img class="logo" src="images/B5/ezprezone-logo.jpg" alt="EZPREZONE Logo" />
+        </a>
+        <nav role="navigation" aria-label="Main navigation">
+          <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="aboutus.html" class="active" aria-current="page">About</a></li>
+            <li><a href="menu.html">Menu</a></li>
+            <li><a href="loyaltycard.html">Loyalty</a></li>
+            <li><a href="contacts.html">Contact</a></li>
+          </ul>
+        </nav>
         <div class="location-btn">
-            <i class="fas fa-map-marker-alt"></i>
-            <a class="aRemove" href="Contacts.html#findourlocation"><span class="findLocation">Find our location</span></a>
+          <i class="fas fa-map-marker-alt" aria-hidden="true"></i>
+          <a class="aRemove" href="contacts.html#findourlocation"><span class="findLocation">Find our location</span></a>
         </div>
-    </header>
+      </header>
 
-    <div class="bgBox">
+      <div class="bgBox">
         <div class="storiesBox">
-            <h1 class="h1Stories">BREW AND BONDS </h1>
+          <h1 class="h1Stories fade">BREW AND BONDS</h1>
         </div>
-    </div>
+      </div>
 
-    <div class="stories-section">
+      <div class="stories-section">
         <div class="container">
-            <div class="stories-content">
-                <div class="stories-item coffee-info">
-                    <h2>About Our Coffee</h2>
-                    <p>Our coffee is the heart of our shop brewed from premium beans and crafted with care. Every espresso shot captures the deep aroma and bold flavor that true coffee lovers appreciate. From smooth lattes to rich brews, each cup reflects our passion for excellence. We believe that great coffee isn’t just a drink it’s an experience that warms the heart and fuels meaningful conversations.</p>
-                </div>
-                <div class="stories-item">
-                    <h2>Our Community</h2>
-                    <p>Our customers are the heart of EZPREZONE. From morning regulars to first-time visitors, each person adds to the vibrant tapestry of our coffee shop. Explore the moments captured by our community, showcasing the warmth and connection fostered over a cup of coffee.</p>
-                    <div class="gallery">
-                        <img src="images/img rev/rev 1.jpg" alt="Customer enjoying coffee">
-                        <img src="images/img rev/rev 2.jpg" alt="Customer smiling">
-                        <img src="images/img rev/rev 3.jpg" alt="Customer group">
-                        <img src="images/img rev/rev4.jpg" alt="Customer with latte art">
-                    </div>
-                </div>
-                <div class="stories-item">
-                    <h2>Our Treats</h2>
-                    <p>Complementing our coffee, our menu features handcrafted treats made with the finest ingredients. From  Espresso  to decadent chocolate latte, each item is designed to pair perfectly with your favorite brew.</p>
-                    <div class="gallery">
-                        <img src="images/img stories/481213348_946774657635552_8933946475576881585_n.jpg" alt="Fresh croissant">
-                        <img src="images/img stories/481458880_946774080968943_1731709676312857411_n.jpg" alt="Chocolate tart">
-                        <img src="images/img stories/481229537_946774910968860_5796452785420760755_n.jpg" alt="Blueberry muffin">
-                        <img src="images/img stories/550402939_1506113217203782_3963192037108488657_n.jpg" alt="Slice of cake">
-                    </div>
-                </div>
-                <div class="stories-item">
-                    <h2>Our Moments</h2>
-                    <p>Watch the magic of EZPREZONE come to life through videos capturing our coffee-making process, customer stories, and the cozy ambiance of our shop.</p>
-                 <div class="video-gallery">
-    <video autoplay muted loop playsinline>
-        <source src="videos/561342002_24730368926573979_4114666881473191019_n.mp4" type="video/mp4">
-        Your browser does not support the video tag.
-    </video>
-    <video autoplay muted loop playsinline>
-        <source src="videos/562555718_25262480596677506_7210573703819162915_n.mp4" type="video/mp4">
-        Your browser does not support the video tag.
-    </video>
-</div>
-                </div>
-                <a href="About Us.html" class="button">Back to About Us</a>
+          <div class="stories-content">
+            <div class="stories-item coffee-info">
+              <h2>About Our Coffee</h2>
+              <p>
+                Our coffee is the heart of our shop brewed from premium beans
+                and crafted with care. Every espresso shot captures the deep
+                aroma and bold flavor that true coffee lovers appreciate. From
+                smooth lattes to rich brews, each cup reflects our passion for
+                excellence. We believe that great coffee isn’t just a drink it’s
+                an experience that warms the heart and fuels meaningful
+                conversations.
+              </p>
             </div>
+            <div class="stories-item">
+              <h2>Our Community</h2>
+              <p>
+                Our customers are the heart of EZPREZONE. From morning regulars
+                to first-time visitors, each person adds to the vibrant tapestry
+                of our coffee shop. Explore the moments captured by our
+                community, showcasing the warmth and connection fostered over a
+                cup of coffee.
+              </p>
+              <div class="gallery">
+                <img
+                  src="images/img rev/rev 1.jpg"
+                  alt="Customer enjoying coffee"
+                />
+                <img src="images/img rev/rev 2.jpg" alt="Customer smiling" />
+                <img src="images/img rev/rev 3.jpg" alt="Customer group" />
+                <img
+                  src="images/img rev/rev4.jpg"
+                  alt="Customer with latte art"
+                />
+              </div>
+            </div>
+            <div class="stories-item">
+              <h2>Our Treats</h2>
+              <p>
+                Complementing our coffee, our menu features handcrafted treats
+                made with the finest ingredients. From Espresso to decadent
+                chocolate latte, each item is designed to pair perfectly with
+                your favorite brew.
+              </p>
+              <div class="gallery">
+                <img
+                  src="images/img stories/481213348_946774657635552_8933946475576881585_n.jpg"
+                  alt="Fresh croissant"
+                />
+                <img
+                  src="images/img stories/481458880_946774080968943_1731709676312857411_n.jpg"
+                  alt="Chocolate tart"
+                />
+                <img
+                  src="images/img stories/481229537_946774910968860_5796452785420760755_n.jpg"
+                  alt="Blueberry muffin"
+                />
+                <img
+                  src="images/img stories/550402939_1506113217203782_3963192037108488657_n.jpg"
+                  alt="Slice of cake"
+                />
+              </div>
+            </div>
+            <div class="stories-item">
+              <h2>Our Moments</h2>
+              <p>
+                Watch the magic of EZPREZONE come to life through videos
+                capturing our coffee-making process, customer stories, and the
+                cozy ambiance of our shop.
+              </p>
+              <div class="video-gallery">
+                <video autoplay muted loop playsinline>
+                  <source
+                    src="videos/561342002_24730368926573979_4114666881473191019_n.mp4"
+                    type="video/mp4"
+                  />
+                  Your browser does not support the video tag.
+                </video>
+                <video autoplay muted loop playsinline>
+                  <source
+                    src="videos/562555718_25262480596677506_7210573703819162915_n.mp4"
+                    type="video/mp4"
+                  />
+                  Your browser does not support the video tag.
+                </video>
+              </div>
+            </div>
+            <a href="aboutus.html" class="button">Back to About Us</a>
+          </div>
         </div>
+      </div>
+
+      <footer class="footer">
+        <p>© 2025 Ezprezo. All Rights Reserved.</p>
+      </footer>
     </div>
 
-   
-  <footer class="footer">
-    <p>© 2025 Ezprezo. All Rights Reserved.</p>
-  </footer>
-  </div>
-</body>
+    <script>
+      (function() {
+        const faders = document.querySelectorAll('.fade');
+        if (!('IntersectionObserver' in window) || faders.length === 0) return;
+        const appearOptions = { threshold: 0.2, rootMargin: '0px 0px -50px 0px' };
+        const appearOnScroll = new IntersectionObserver((entries, observer) => {
+          entries.forEach(entry => {
+            if (!entry.isIntersecting) return;
+            entry.target.classList.add('appear');
+            observer.unobserve(entry.target);
+          });
+        }, appearOptions);
+        faders.forEach(fader => appearOnScroll.observe(fader));
+      })();
+    </script>
+
+    <script>
+      (function(){
+        const body = document.body;
+        if(!body) return;
+        body.classList.add('page-transition');
+        window.addEventListener('DOMContentLoaded', ()=> requestAnimationFrame(()=> body.classList.remove('preload')));
+        document.addEventListener('click', function(e){
+          const a = e.target.closest('a');
+          if(!a) return;
+          const href = a.getAttribute('href');
+          if(!href) return;
+          if(a.target === '_blank' || href.indexOf('mailto:') === 0 || href.indexOf('tel:') === 0 || href.indexOf('javascript:') === 0) return;
+          let url;
+          try{ url = new URL(href, location.href); }catch(err){ return; }
+          if(url.origin !== location.origin) return;
+          if(url.hash && url.pathname === location.pathname) return;
+          if(a.hasAttribute('data-no-transition')) return;
+          e.preventDefault();
+          body.classList.add('preload');
+          setTimeout(()=> location.href = url.href, 360);
+        }, false);
+      })();
+    </script>
+  </body>
 </html>

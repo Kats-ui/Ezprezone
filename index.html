@@ -1,91 +1,128 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
+  <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>EZPREZONE</title>
+    <link rel="stylesheet" href="CSS/common.css" />
     <link rel="stylesheet" href="CSS/index.css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
-</head>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
+  </head>
 
-<body>
+  <body class="page-transition preload">
     <!-- Navbar -->
-    <header class="navbar">
-        <a href="#" class="logo-link">
-            <img src="images/img/logo.jpg" alt="EZPREZONE" class="logo" />
-        </a>
+    <header class="navbar" role="banner">
+      <a href="index.html" class="logo-link">
+        <img class="logo" src="images/B5/ezprezone-logo.jpg" alt="EZPREZONE Logo" />
+      </a>
 
+      <nav role="navigation" aria-label="Main navigation">
         <ul class="nav-links">
-            <li><a href="Home.html" class="active">Home</a></li>
-            <li><a href="About Us.html">About</a></li>
-            <li><a href="Menu.html">Menu</a></li>
-            <li><a href="Loyalty Card.html">Loyalty</a></li>
-            <li><a href="Contacts.html">Contact</a></li>
+          <li><a href="index.html" class="active" aria-current="page">Home</a></li>
+          <li><a href="aboutus.html">About</a></li>
+          <li><a href="menu.html">Menu</a></li>
+          <li><a href="loyaltycard.html">Loyalty</a></li>
+          <li><a href="contacts.html">Contact</a></li>
         </ul>
+      </nav>
 
-        <div class="location-btn">
-            <i class="fas fa-map-marker-alt"></i></i>
-            <a class="aRemove" href="Contacts.html#findourlocation"><span class="findLocation">Find our location</span></a>
-        </div>
-    
+      <div class="location-btn">
+        <i class="fas fa-map-marker-alt" aria-hidden="true"></i>
+        <a class="aRemove" href="contacts.html#findourlocation"><span class="findLocation">Find our location</span></a>
+      </div>
     </header>
 
     <!-- Hero Section -->
     <section class="hero">
-        
-        <div class="hero-content">
-            <img src="images/img/logo-removebg-preview.png" alt="EZPREZONE" class="logo-display">
-            <h1>Your moments and cup fills with joy...</h1>
-            
-            <a href="Menu.html" class="cta-button">Order Now</a>
-        </div>
+      <div class="hero-content">
+        <img
+          src="images/img/logo-removebg-preview.png"
+          alt="EZPREZONE"
+          class="logo-display fade"
+        />
+        <h1 class="fade">Savor every moment — one cup at a time.</h1>
+
+        <a href="menu.html" class="cta-button fade">Order Now</a>
+      </div>
     </section>
 
     <!-- Promotional Cards -->
     <section class="promo-section">
-        <div class="promo-card">
-            <h2>Feeling Tired Today?</h2>
-            <p>Coffee is the key, make the best version of you</p>
-            <a href="Contacts.html" class="promo-button">Shop Now</a>
-        </div>
+<div class="promo-card fade">
+        <h2>Feeling Tired Today?</h2>
+        <p>Coffee is the key, make the best version of you</p>
+        <a href="contacts.html" class="promo-button">Shop Now</a>
+      </div>
 
-        <div class="promo-card">
-            <h2>Rejected By Your Crush?</h2>
-            <p>Lucky !, Try our Lucky Spins!</p>
-            <a href="Loyalty Card.html" class="promo-button">Loyalty Card</a>
-        </div>
+<div class="promo-card fade">
+        <h2>Rejected By Your Crush?</h2>
+        <p>Lucky !, Try our Lucky Spins!</p>
+        <a href="loyaltycard.html" class="promo-button">Loyalty Card</a>
+      </div>
 
-        <div class="promo-card">
-            <h2>Did you know?</h2>
-            <p>Coffee is a fruit</p>
-            <p class="fun-fact">"Despite being called a 'bean', coffee actually comes from a cherry-like fruit! The
-                seeds inside are what we roast to brew our favorite drink."</p>
-            <a href="About Us.html" class="promo-button">Learn More</a>
-        </div>
+      <div class="promo-card fade">
+        <h2>Did you know?</h2>
+        <p>Coffee is a fruit</p>
+        <p class="fun-fact">
+          "Despite being called a 'bean', coffee actually comes from a
+          cherry-like fruit! The seeds inside are what we roast to brew our
+          favorite drink."
+        </p>
+        <a href="aboutus.html" class="promo-button">Learn More</a>
+      </div>
     </section>
 
     <!-- Footer -->
     <footer class="footer">
-        <p>© 2025 Ezprezo. All Rights Reserved.</p>
+      <p>© 2025 Ezprezo. All Rights Reserved.</p>
     </footer>
 
     <!-- Scroll Animation Script -->
     <script>
-        const faders = document.querySelectorAll('.fade');
-        const appearOptions = {
-            threshold: 0.2,
-            rootMargin: "0px 0px -50px 0px"
-        };
-        const appearOnScroll = new IntersectionObserver(function (entries, observer) {
-            entries.forEach(entry => {
-                if (!entry.isIntersecting) return;
-                entry.target.classList.add('appear');
-                observer.unobserve(entry.target);
-            });
-        }, appearOptions);
-        faders.forEach(fader => appearOnScroll.observe(fader));
+      const faders = document.querySelectorAll(".fade");
+      const appearOptions = {
+        threshold: 0.2,
+        rootMargin: "0px 0px -50px 0px",
+      };
+      const appearOnScroll = new IntersectionObserver(function (
+        entries,
+        observer
+      ) {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+          entry.target.classList.add("appear");
+          observer.unobserve(entry.target);
+        });
+      },
+      appearOptions);
+      faders.forEach((fader) => appearOnScroll.observe(fader));
     </script>
-</body>
 
+    <script>
+      (function(){
+        const body = document.body;
+        if(!body) return;
+        body.classList.add('page-transition');
+        window.addEventListener('DOMContentLoaded', ()=> requestAnimationFrame(()=> body.classList.remove('preload')));
+        document.addEventListener('click', function(e){
+          const a = e.target.closest('a');
+          if(!a) return;
+          const href = a.getAttribute('href');
+          if(!href) return;
+          if(a.target === '_blank' || href.indexOf('mailto:') === 0 || href.indexOf('tel:') === 0 || href.indexOf('javascript:') === 0) return;
+          let url;
+          try{ url = new URL(href, location.href); }catch(err){ return; }
+          if(url.origin !== location.origin) return;
+          if(url.hash && url.pathname === location.pathname) return;
+          if(a.hasAttribute('data-no-transition')) return;
+          e.preventDefault();
+          body.classList.add('preload');
+          setTimeout(()=> location.href = url.href, 360);
+        }, false);
+      })();
+    </script>
+  </body>
 </html>
