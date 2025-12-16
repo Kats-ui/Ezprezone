@@ -1,0 +1,131 @@
+/* Order page styles */
+.order-page {
+  padding: 3rem 5%;
+  max-width: 1200px;
+  margin: 0 auto 4rem;
+}
+.order-title {
+  text-align: center;
+  font-size: 2rem;
+  color: var(--brand-brown);
+  margin-bottom: 1.5rem;
+}
+.order-layout {
+  display: grid;
+  grid-template-columns: 1fr 360px;
+  gap: 1.5rem;
+}
+.menu-panel {
+  background: #fff;
+  padding: 1rem;
+  border-radius: 12px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.06);
+}
+.menu-list .menu-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.75rem 0.5rem;
+  border-bottom: 1px dashed #eee;
+}
+.menu-item h4 {
+  margin: 0;
+  font-size: 1rem;
+}
+.menu-item .price {
+  color: #6d4c41;
+  font-weight: 700;
+}
+.controls {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+.controls .qty {
+  width: 60px;
+  padding: 0.25rem;
+  border-radius: 6px;
+  border: 1px solid #ddd;
+}
+
+.cart-panel {
+  background: #fff;
+  padding: 1rem;
+  border-radius: 12px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.06);
+}
+.cart-list {
+  max-height: 280px;
+  overflow-y: auto;
+  margin-bottom: 1rem;
+}
+.cart-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem 0;
+}
+.cart-item .small {
+  color: #666;
+  font-size: 0.9rem;
+}
+.cart-item .right {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+.cart-item input[type="number"] {
+  width: 58px;
+  padding: 4px;
+}
+.cart-summary {
+  border-top: 1px solid #eee;
+  padding-top: 0.8rem;
+}
+.summary-row {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 0.6rem;
+}
+.payment-section {
+  margin-bottom: 0.8rem;
+}
+.payment-section label {
+  display: block;
+  margin: 0.25rem 0;
+}
+.payment-details input {
+  width: 100%;
+  padding: 0.4rem;
+  margin-top: 0.4rem;
+}
+.customer-section input {
+  width: 100%;
+  padding: 0.5rem;
+  margin-top: 0.35rem;
+  border-radius: 6px;
+  border: 1px solid #ddd;
+}
+.order-message {
+  margin-top: 0.6rem;
+  font-weight: 600;
+}
+.order-message.error {
+  color: #b00020;
+}
+.order-message.success {
+  color: green;
+}
+
+.empty {
+  color: #777;
+}
+
+@media (max-width: 900px) {
+  .order-layout {
+    grid-template-columns: 1fr;
+  }
+  .cart-panel {
+    order: 2;
+  }
+}

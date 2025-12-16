@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Order — EZPREZONE</title>
+    <link rel="stylesheet" href="CSS/common.css" />
+    <link rel="stylesheet" href="CSS/Order.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
+  </head>
+  <body class="page-transition preload">
+    <header class="navbar" role="banner">
+      <a href="index.html" class="logo-link">
+        <img
+          class="logo"
+          src="images/B5/ezprezone-logo.jpg"
+          alt="EZPREZONE Logo"
+        />
+      </a>
+
+      <nav role="navigation" aria-label="Main navigation">
+        <ul class="nav-links">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="aboutus.html">About</a></li>
+          <li><a href="menu.html">Menu</a></li>
+          <li><a href="loyaltycard.html">Loyalty</a></li>
+          <li><a href="contacts.html">Contact</a></li>
+          <li>
+            <a href="order.html" class="active" aria-current="page">Order</a>
+          </li>
+        </ul>
+      </nav>
+
+      <div class="location-btn">
+        <i class="fas fa-map-marker-alt" aria-hidden="true"></i>
+        <a class="aRemove" href="contacts.html#findourlocation"
+          ><span class="findLocation">Find our location</span></a
+        >
+      </div>
+    </header>
+
+    <main class="order-page">
+      <h1 class="order-title fade">Place Your Order</h1>
+
+      <div class="order-layout">
+        <section class="menu-panel">
+          <h2>Menu</h2>
+          <p class="hint">Click "Add" to add items to your cart.</p>
+          <div id="menuList" class="menu-list">
+            <!-- items rendered by JS -->
+          </div>
+        </section>
+
+        <aside class="cart-panel">
+          <h2>Cart</h2>
+          <div id="cartList" class="cart-list">
+            <p class="empty">Your cart is empty</p>
+          </div>
+
+          <div class="cart-summary">
+            <div class="summary-row">
+              <span>Subtotal</span>
+              <span id="subtotal">₱0.00</span>
+            </div>
+
+            <div class="payment-section">
+              <h3>Payment Method</h3>
+              <label
+                ><input
+                  type="radio"
+                  name="payment"
+                  value="over-the-counter"
+                  checked
+                />
+                Over-the-counter</label
+              >
+              <label
+                ><input type="radio" name="payment" value="gcash" />
+                GCash</label
+              >
+              <label
+                ><input type="radio" name="payment" value="paymaya" />
+                PayMaya</label
+              >
+
+              <div id="paymentDetails" class="payment-details">
+                <!-- dynamic fields appear here for GCash/PayMaya -->
+              </div>
+            </div>
+
+            <div class="customer-section">
+              <h3>Your details</h3>
+              <input id="custName" type="text" placeholder="Full name" />
+              <input
+                id="custContact"
+                type="text"
+                placeholder="Phone / Contact"
+              />
+            </div>
+
+            <button id="placeOrder" class="button">Place Order</button>
+            <p id="orderMessage" class="order-message"></p>
+          </div>
+        </aside>
+      </div>
+    </main>
+
+    <footer class="footer">
+      <p>© 2025 Ezprezo. All Rights Reserved.</p>
+    </footer>
+
+    <script>
+      // Sample item list (extend as needed)
+      const items = [
+        { id: "espresso", name: "Espresso", price: 60 },
+        { id: "americano", name: "Americano", price: 70 },
+        { id: "latte", name: "Latte", price: 95 },
+        { id: "matcha-latte", name: "Matcha Latte", price: 110 },
+        { id: "croffle", name: "Croffle Classic", price: 120 },
+        { id: "pasta", name: "Pasta Alfredo", price: 150 },
+      ];
+
+      const menuList = document.getElementById("menuList");
+      const cartList = document.getElementById("cartList");
+      const subtotalEl = document.getElementById("subtotal");
+      const paymentDetails = document.getElementById("paymentDetails");
+      const placeOrderBtn = document.getElementById("placeOrder");
+      const orderMessage = document.getElementById("orderMessage");
+
+      let cart = {};
+
+      function formatMoney(n) {
+        return "₱" + n.toFixed(2);
+      }
+
+      function renderMenu() {
+        menuList.innerHTML = "";
+        items.forEach((it) => {
+          const card = document.createElement("div");
+          card.className = "menu-item card";
+          card.innerHTML = `
+            <h4>${it.name}</h4>
+            <p class="price">${formatMoney(it.price)}</p>
+            <div class="controls">
+              <input type="number" min="1" value="1" class="qty" data-id="${
+                it.id
+              }" />
+              <button class="button add" data-id="${it.id}">Add</button>
+            </div>
+          `;
+          menuList.appendChild(card);
+        });
+
+        menuList.addEventListener("click", (e) => {
+          const btn = e.target.closest(".add");
+          if (!btn) return;
+          const id = btn.dataset.id;
+          const qtyInput = menuList.querySelector(`.qty[data-id="${id}"]`);
+          const qty = Math.max(1, parseInt(qtyInput.value || 1, 10));
+          addToCart(id, qty);
+        });
+      }
+
+      function addToCart(id, qty = 1) {
+        const item = items.find((i) => i.id === id);
+        if (!item) return;
+        cart[id] = cart[id] || { ...item, qty: 0 };
+        cart[id].qty += qty;
+        renderCart();
+      }
+
+      function removeFromCart(id) {
+        delete cart[id];
+        renderCart();
+      }
+
+      function updateQty(id, qty) {
+        if (qty <= 0) {
+          removeFromCart(id);
+          return;
+        }
+        cart[id].qty = qty;
+        renderCart();
+      }
+
+      function renderCart() {
+        cartList.innerHTML = "";
+        const keys = Object.keys(cart);
+        if (keys.length === 0) {
+          cartList.innerHTML = '<p class="empty">Your cart is empty</p>';
+          subtotalEl.textContent = formatMoney(0);
+          return;
+        }
+        let sum = 0;
+        keys.forEach((k) => {
+          const it = cart[k];
+          const row = document.createElement("div");
+          row.className = "cart-item";
+          const total = it.price * it.qty;
+          sum += total;
+          row.innerHTML = `
+            <div class="left">
+              <strong>${it.name}</strong>
+              <div class="small">${formatMoney(
+                it.price
+              )} x <input type="number" min="1" value="${
+            it.qty
+          }" class="cart-qty" data-id="${it.id}" /></div>
+            </div>
+            <div class="right">
+              <span class="item-total">${formatMoney(total)}</span>
+              <button class="remove" data-id="${it.id}" aria-label="Remove ${
+            it.name
+          }">✕</button>
+            </div>
+          `;
+          cartList.appendChild(row);
+        });
+        subtotalEl.textContent = formatMoney(sum);
+
+        // events for qty and remove
+        cartList.querySelectorAll(".cart-qty").forEach((inp) => {
+          inp.addEventListener("change", (e) => {
+            const id = e.target.dataset.id;
+            let q = parseInt(e.target.value || 1, 10);
+            if (isNaN(q) || q < 1) q = 1;
+            updateQty(id, q);
+          });
+        });
+        cartList.querySelectorAll(".remove").forEach((btn) => {
+          btn.addEventListener("click", (e) => removeFromCart(btn.dataset.id));
+        });
+      }
+
+      // Payment method logic
+      function handlePaymentChange() {
+        const method = document.querySelector(
+          'input[name="payment"]:checked'
+        ).value;
+        paymentDetails.innerHTML = "";
+        if (method === "gcash" || method === "paymaya") {
+          const label = document.createElement("label");
+          label.textContent = "Reference Phone / Transaction ID (required)";
+          const input = document.createElement("input");
+          input.type = "text";
+          input.id = "paymentRef";
+          input.placeholder =
+            method === "gcash"
+              ? "GCash phone number / ref"
+              : "PayMaya phone number / ref";
+          paymentDetails.appendChild(label);
+          paymentDetails.appendChild(input);
+        } else {
+          const p = document.createElement("p");
+          p.textContent = "Pay at the counter when you pick up your order.";
+          paymentDetails.appendChild(p);
+        }
+      }
+
+      // Place order
+      placeOrderBtn.addEventListener("click", () => {
+        orderMessage.textContent = "";
+        const keys = Object.keys(cart);
+        if (keys.length === 0) {
+          orderMessage.textContent = "Add at least one item to the cart.";
+          orderMessage.classList.add("error");
+          return;
+        }
+        const name = document.getElementById("custName").value.trim();
+        const contact = document.getElementById("custContact").value.trim();
+        if (!name || !contact) {
+          orderMessage.textContent = "Please enter your name and contact.";
+          orderMessage.classList.add("error");
+          return;
+        }
+        const method = document.querySelector(
+          'input[name="payment"]:checked'
+        ).value;
+        let ref = "";
+        if (method === "gcash" || method === "paymaya") {
+          const pRef = document.getElementById("paymentRef");
+          if (!pRef || !pRef.value.trim()) {
+            orderMessage.textContent =
+              "Please enter payment reference for selected method.";
+            orderMessage.classList.add("error");
+            return;
+          }
+          ref = pRef.value.trim();
+        }
+
+        // build a summary
+        let total = 0;
+        let summary = `Order for ${name} (${contact})\nPayment: ${method}${
+          ref ? " — " + ref : ""
+        }\n\nItems:\n`;
+        keys.forEach((k) => {
+          const it = cart[k];
+          summary += `${it.name} x ${it.qty} = ${formatMoney(
+            it.qty * it.price
+          )}\n`;
+          total += it.qty * it.price;
+        });
+        summary += `\nTotal: ${formatMoney(total)}`;
+
+        // show summary (replace with ajax submission back-end if needed)
+        alert("Order placed!\n\n" + summary);
+        orderMessage.textContent = "Order placed successfully! Thank you.";
+        orderMessage.classList.remove("error");
+        orderMessage.classList.add("success");
+        // reset
+        cart = {};
+        renderCart();
+        document.getElementById("custName").value = "";
+        document.getElementById("custContact").value = "";
+        handlePaymentChange();
+      });
+
+      // init
+      renderMenu();
+      renderCart();
+      document
+        .querySelectorAll('input[name="payment"]')
+        .forEach((r) => r.addEventListener("change", handlePaymentChange));
+      handlePaymentChange();
+    </script>
+
+    <script>
+      (function () {
+        const body = document.body;
+        if (!body) return;
+        body.classList.add("page-transition");
+        window.addEventListener("DOMContentLoaded", () =>
+          requestAnimationFrame(() => body.classList.remove("preload"))
+        );
+        document.addEventListener(
+          "click",
+          function (e) {
+            const a = e.target.closest("a");
+            if (!a) return;
+            const href = a.getAttribute("href");
+            if (!href) return;
+            if (
+              a.target === "_blank" ||
+              href.indexOf("mailto:") === 0 ||
+              href.indexOf("tel:") === 0 ||
+              href.indexOf("javascript:") === 0
+            )
+              return;
+            let url;
+            try {
+              url = new URL(href, location.href);
+            } catch (err) {
+              return;
+            }
+            if (url.origin !== location.origin) return;
+            if (url.hash && url.pathname === location.pathname) return;
+            if (a.hasAttribute("data-no-transition")) return;
+            e.preventDefault();
+            body.classList.add("preload");
+            setTimeout(() => (location.href = url.href), 360);
+          },
+          false
+        );
+      })();
+    </script>
+  </body>
+</html>
